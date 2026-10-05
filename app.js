@@ -1,5 +1,6 @@
 // app.js — geração de arquivos/payloads e wiring da UI
 const customField = document.getElementById('customPayload');
+const exampleSelect = document.getElementById('payloadExample');
 const statusEl = document.getElementById('status');
 
 function defaultBaseName() {
@@ -7,15 +8,48 @@ function defaultBaseName() {
   return `file-gen_${stamp}`;
 }
 
+// vários exemplos por tipo — cada marcador é inofensivo, nenhum é exploit funcional
+const EXAMPLES = {
+  js: mark => [
+    `<script>alert('${mark}')</script>`,
+    `<script>confirm('${mark}')</script>`,
+    `<script>document.title='${mark}'</script>`,
+  ],
+  php: mark => [
+    `<?php /* ${mark} */ echo "${mark}"; ?>`,
+    `<?= "${mark}-" . date('Y-m-d'); ?>`,
+    `<?php echo md5('${mark}'); ?>`,
+  ],
+  py: mark => [
+    `print("${mark}")`,
+    `import sys; sys.stdout.write("${mark}")`,
+    `raise Exception("${mark}")`,
+  ],
+  sql: mark => [
+    `' OR '1'='1' -- ${mark}`,
+    `'; SELECT '${mark}'; --`,
+    `' UNION SELECT '${mark}'-- `,
+  ],
+};
+
+function populateExamples(type, mark) {
+  if (!EXAMPLES[type]) { exampleSelect.innerHTML = ''; exampleSelect.hidden = true; return; }
+  exampleSelect.hidden = false;
+  const list = EXAMPLES[type](mark);
+  exampleSelect.innerHTML = list
+    .map((ex, i) => `<option value="${i}">${ex.replace(/</g, '&lt;')}</option>`)
+    .join('');
+}
+
 function payloadFor(type, mark) {
+  if (EXAMPLES[type]) {
+    const list = EXAMPLES[type](mark);
+    return list[exampleSelect.value || 0];
+  }
   switch (type) {
-    case 'js':   return `<script>alert('${mark}')</script>`;
-    case 'php':  return `<?php /* ${mark} */ echo "${mark}"; ?>`;
-    case 'py':   return `print("${mark}")`;
-    case 'sql':  return `' OR '1'='1' -- ${mark}`;
     case 'custom': return customField.value || `${mark} (payload personalizado vazio)`;
     case 'none':
-    default:     return '';
+    default:       return '';
   }
 }
 
@@ -29,11 +63,15 @@ function triggerDownload(filename, blob) {
 }
 
 function wirePayloadToggle() {
+  const mark = 'FILEGEN-TEST';
   document.getElementsByName('payload').forEach(r => {
     r.addEventListener('change', () => {
-      customField.disabled = document.querySelector('input[name="payload"]:checked').value !== 'custom';
+      const type = document.querySelector('input[name="payload"]:checked').value;
+      customField.disabled = type !== 'custom';
+      populateExamples(type, mark);
     });
   });
+  populateExamples(document.querySelector('input[name="payload"]:checked').value, mark);
 }
 
 function wireGenerate() {

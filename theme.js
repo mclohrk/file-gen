@@ -1,4 +1,4 @@
-// theme.js — alternância dark/light (switch sol/lua) persistida
+// theme.js — alternância dark/light persistida
 const Theme = (() => {
   let mode = localStorage.getItem('filegen-theme') || 'dark';
 
