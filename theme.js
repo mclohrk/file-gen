@@ -1,11 +1,11 @@
-// theme.js — alternância dark/light persistida
+// theme.js — alternância dark/light (switch sol/lua) persistida
 const Theme = (() => {
   let mode = localStorage.getItem('filegen-theme') || 'dark';
 
   function apply() {
     document.documentElement.setAttribute('data-theme', mode);
     const btn = document.getElementById('themeToggle');
-    if (btn) btn.textContent = mode === 'dark' ? '◐' : '◑';
+    if (btn) btn.setAttribute('aria-pressed', mode === 'dark' ? 'true' : 'false');
   }
 
   function toggle() {

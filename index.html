@@ -11,8 +11,24 @@
 
 <header class="top">
   <div class="toolbar">
-    <button id="themeToggle" class="ghost-btn" type="button" aria-label="alternar tema">◐</button>
-    <button id="langToggle" class="ghost-btn" type="button">🌐 PT/EN</button>
+    <button id="themeToggle" class="switch" type="button" aria-label="alternar tema" aria-pressed="true">
+      <svg class="switch-icon sun" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"/>
+        <line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/>
+        <line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/>
+        <line x1="4.9" y1="4.9" x2="6.6" y2="6.6"/><line x1="17.4" y1="17.4" x2="19.1" y2="19.1"/>
+        <line x1="4.9" y1="19.1" x2="6.6" y2="17.4"/><line x1="17.4" y1="6.6" x2="19.1" y2="4.9"/>
+      </svg>
+      <span class="switch-knob"></span>
+      <svg class="switch-icon moon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/>
+      </svg>
+    </button>
+    <button id="langToggle" class="switch switch-lang" type="button" aria-label="alternar idioma" aria-pressed="false">
+      <span class="switch-label pt">PT</span>
+      <span class="switch-knob"></span>
+      <span class="switch-label en">EN</span>
+    </button>
   </div>
   <h1>file-gen
     <svg class="title-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -35,7 +51,6 @@
     <h2><span data-i18n="s1title">01 · container</span></h2>
     <p class="hint" data-i18n="s1hint">extensão do arquivo que o input da aplicação espera.</p>
     <div class="grid" id="containers">
-      <!-- v0.2: tooltip no .pdf explica que o conteúdo é HTML, não PDF real -->
       <label data-i18n-title="tipPdf"><input type="checkbox" value="pdf" checked><span>.pdf</span></label>
       <label><input type="checkbox" value="php"><span>.php</span></label>
       <label><input type="checkbox" value="js"><span>.js</span></label>
@@ -49,8 +64,7 @@
 
   <section class="block">
     <h2><span data-i18n="s2title">02 · payload</span></h2>
-    <p class="hint" data-i18n="s2hint">marcador inofensivo  prova a falha sem executar nada perigoso.</p>
-    <!-- v0.2: tooltips por payload — cada label carrega a hipótese de teste no atributo title -->
+    <p class="hint" data-i18n="s2hint">marcador inofensivo — prova a falha sem executar nada perigoso.</p>
     <div class="grid" id="payloads">
       <label data-i18n-title="tipJs"><input type="radio" name="payload" value="js" checked><span>js · alert()</span></label>
       <label data-i18n-title="tipPhp"><input type="radio" name="payload" value="php"><span>php · <span data-i18n="marker">marcador</span></span></label>
