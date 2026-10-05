@@ -1,6 +1,6 @@
 :root{
   /* escala tipográfica — editar --fs-base rescala tudo por proporção */
-  --fs-base: 16px;
+  --fs-base: 22px;
   --fs-ratio: 1.2;
   --fs-xs: calc(var(--fs-base) / var(--fs-ratio) / var(--fs-ratio));
   --fs-sm: calc(var(--fs-base) / var(--fs-ratio));
