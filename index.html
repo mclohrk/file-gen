@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>File-gen  gerador de arquivos e payload para vulnerabilidade file upload</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234C6EF5' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='3' width='13' height='18' rx='1.5'/%3E%3Crect x='8' y='1.4' width='5' height='3' rx='0.8'/%3E%3Cline x1='7' y1='9' x2='14' y2='9'/%3E%3Cline x1='7' y1='12.5' x2='14' y2='12.5'/%3E%3Cline x1='7' y1='16' x2='11' y2='16'/%3E%3Ccircle cx='18' cy='18' r='5.2' fill='%230B0E1A'/%3E%3Cline x1='18' y1='15.5' x2='18' y2='20.5'/%3E%3Cline x1='15.5' y1='18' x2='20.5' y2='18'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="toolbar">
+    <button id="themeToggle" class="ghost-btn" type="button" aria-label="alternar tema">◐</button>
+    <button id="langToggle" class="ghost-btn" type="button">🌐 PT/EN</button>
+  </div>
+  <h1>file-gen
+    <svg class="title-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="4" y="3" width="13" height="18" rx="1.5"/>
+      <rect x="8" y="1.4" width="5" height="3" rx="0.8"/>
+      <line x1="7" y1="9" x2="14" y2="9"/>
+      <line x1="7" y1="12.5" x2="14" y2="12.5"/>
+      <line x1="7" y1="16" x2="11" y2="16"/>
+      <circle class="badge" cx="18" cy="18" r="5.2"/>
+      <line x1="18" y1="15.5" x2="18" y2="20.5"/>
+      <line x1="15.5" y1="18" x2="20.5" y2="18"/>
+    </svg>
+  </h1>
+  <p class="sub" data-i18n="subtitle">Monta arquivos de teste para validar controles de upload referentes à vulnerabilidade de file upload, podendo adicionar payloads personalizados.</p>
+</header>
+
+<main class="panel">
+
+  <section class="block">
+    <h2><span data-i18n="s1title">01 · container</span></h2>
+    <p class="hint" data-i18n="s1hint">extensão do arquivo que o input da aplicação espera.</p>
+    <div class="grid" id="containers">
+      <label><input type="checkbox" value="pdf" checked><span>.pdf</span></label>
+      <label><input type="checkbox" value="php"><span>.php</span></label>
+      <label><input type="checkbox" value="js"><span>.js</span></label>
+      <label><input type="checkbox" value="svg"><span>.svg</span></label>
+      <label><input type="checkbox" value="xml"><span>.xml</span></label>
+      <label><input type="checkbox" value="csv"><span>.csv</span></label>
+      <label><input type="checkbox" value="jpg"><span>.jpg</span></label>
+      <label><input type="checkbox" value="zip"><span>.zip</span></label>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2><span data-i18n="s2title">02 · payload</span></h2>
+    <p class="hint" data-i18n="s2hint">marcador inofensivo  prova a falha sem executar nada perigoso.</p>
+    <div class="grid" id="payloads">
+      <label><input type="radio" name="payload" value="js" checked><span>js · alert()</span></label>
+      <label><input type="radio" name="payload" value="php"><span>php · <span data-i18n="marker">marcador</span></span></label>
+      <label><input type="radio" name="payload" value="py"><span>python · print()</span></label>
+      <label><input type="radio" name="payload" value="sql"><span data-i18n="sqltest">sql · string de teste</span></label>
+      <label><input type="radio" name="payload" value="custom"><span data-i18n="custom">personalizado</span></label>
+      <label><input type="radio" name="payload" value="none"><span data-i18n="none">nenhum (vazio)</span></label>
+    </div>
+    <textarea id="customPayload" data-i18n-ph="customPh" placeholder="cole aqui o payload autorizado pro teste…" disabled></textarea>
+  </section>
+
+  <section class="block">
+    <h2><span data-i18n="s3title">03 · saída</span></h2>
+    <div class="row">
+      <label class="name-field">
+        <span data-i18n="baseNameLabel">Nome base</span>
+        <input type="text" id="baseName" value="" data-i18n-ph="baseNamePh" placeholder="deixe em branco pra usar o padrão do projeto" spellcheck="false">
+      </label>
+      <div class="mode">
+        <label><input type="radio" name="mode" value="single" checked><span data-i18n="mode1">1 arquivo</span></label>
+        <label><input type="radio" name="mode" value="batch"><span data-i18n="mode2">lote (.zip, 1 por container)</span></label>
+      </div>
+    </div>
+  </section>
+
+  <button id="generate" class="ghost-btn generate-btn" data-i18n="generateBtn">Gerar</button>
+  <p class="status" id="status"></p>
+
+</main>
+
+<footer>
+  <a href="https://mclohrk.xyz" target="_blank">mclohrk.xyz</a>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="i18n.js"></script>
+<script src="theme.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

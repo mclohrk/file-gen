@@ -1,0 +1,109 @@
+:root{
+  /* escala tipográfica — editar --fs-base rescala tudo por proporção */
+  --fs-base: 16px;
+  --fs-ratio: 1.2;
+  --fs-xs: calc(var(--fs-base) / var(--fs-ratio) / var(--fs-ratio));
+  --fs-sm: calc(var(--fs-base) / var(--fs-ratio));
+  --fs-md: var(--fs-base);
+  --fs-lg: calc(var(--fs-base) * var(--fs-ratio));
+  --fs-xl: calc(var(--fs-base) * var(--fs-ratio) * var(--fs-ratio));
+  --fs-xxl: calc(var(--fs-base) * var(--fs-ratio) * var(--fs-ratio) * var(--fs-ratio));
+
+  /* Sapphire Nightfall Whisper — dark (padrão) */
+  --bg:#0B0E1A; --surface:#141B2E; --line:#243150;
+  --text:#D6DCEE; --muted:#8894B8;
+  --accent:#4C6EF5; --accent-soft:#8FA3D9;
+}
+:root[data-theme="light"]{
+  --bg:#EEF1FA; --surface:#FFFFFF; --line:#C9D3EC;
+  --text:#141B2E; --muted:#5C6690;
+  --accent:#2A4FD9; --accent-soft:#3E5BC4;
+}
+@media (max-width: 480px){ :root{ --fs-base: 15px; } }
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:var(--fs-md); line-height:1.55;
+  transition:background .2s, color .2s;
+}
+a{ color:var(--accent-soft); }
+
+.top{ max-width:720px; margin:0 auto; padding:40px 20px 24px; }
+.toolbar{ display:flex; justify-content:flex-end; gap:6px; margin-bottom:18px; }
+h1{ font-size:var(--fs-xxl); margin:10px 0 6px; letter-spacing:-0.01em; }
+.title-icon{
+  width:0.9em; height:0.9em; vertical-align:middle;
+  fill:none; stroke:var(--accent-soft); stroke-width:1.6;
+  stroke-linecap:round; stroke-linejoin:round;
+}
+.title-icon .badge{ fill:var(--bg); stroke:var(--accent-soft); transition:fill .2s; }
+.sub{ color:var(--muted); font-size:var(--fs-sm); max-width:60ch; }
+
+.panel{ max-width:720px; margin:0 auto; padding:0 20px 60px; }
+.block{
+  border:1px solid var(--line); border-radius:4px;
+  padding:20px; margin-bottom:16px; background:var(--surface);
+}
+.block h2{ font-size:var(--fs-md); margin:0 0 4px; color:var(--text); font-weight:600; }
+.hint{ color:var(--muted); font-size:var(--fs-xs); margin:0 0 14px; }
+
+.grid{ display:flex; flex-wrap:wrap; gap:4px 16px; }
+.grid label{
+  font-size:var(--fs-sm); cursor:pointer;
+  display:flex; align-items:center; gap:6px;
+  padding:4px 0; border-bottom:1px solid transparent;
+  transition:border-color .15s, color .15s;
+}
+.grid label:hover{ border-color:var(--line); }
+.grid label:has(input:checked){ color:var(--accent-soft); border-color:var(--accent); }
+.grid input{ accent-color:var(--accent); }
+
+textarea{
+  width:100%; margin-top:12px; min-height:70px; resize:vertical;
+  background:var(--bg); color:var(--text); border:1px solid var(--line);
+  border-radius:3px; padding:10px; font:inherit; font-size:var(--fs-sm);
+}
+textarea:disabled{ opacity:.4; }
+
+.row{ display:flex; flex-wrap:wrap; gap:20px; align-items:flex-end; }
+.name-field{ display:flex; flex-direction:column; gap:6px; font-size:var(--fs-xs); color:var(--muted); flex:1; min-width:200px; }
+.name-field input{
+  background:var(--bg); color:var(--text); border:1px solid var(--line);
+  border-radius:3px; padding:9px 10px; font:inherit; font-size:var(--fs-md);
+}
+.mode{ display:flex; gap:16px; }
+.mode label{
+  font-size:var(--fs-sm); cursor:pointer; display:flex; align-items:center; gap:6px;
+  border-bottom:1px solid transparent; padding:4px 0;
+}
+.mode label:hover{ border-color:var(--line); }
+.mode label:has(input:checked){ color:var(--accent-soft); border-color:var(--accent); }
+
+/* botões ghost — sem fundo, sem borda, sublinha ao passar o mouse */
+.ghost-btn{
+  background:none; border:none; color:var(--text); cursor:pointer;
+  font:inherit; font-size:var(--fs-sm); padding:4px 2px;
+  border-bottom:1px solid transparent;
+}
+.ghost-btn:hover{ color:var(--accent-soft); border-color:var(--accent-soft); }
+
+.generate-btn{
+  display:block; width:100%; text-align:center; padding:14px;
+  font-size:var(--fs-lg); font-weight:600; letter-spacing:.02em;
+  border:none; border-radius:4px;
+  background:rgba(158,201,242,0.16); color:#9EC9F2;
+}
+.generate-btn:hover{ background:rgba(158,201,242,0.26); color:#BFE1F5; }
+
+.status{ text-align:center; color:var(--muted); font-size:var(--fs-xs); min-height:18px; }
+
+footer{ text-align:center; padding:30px; color:var(--muted); font-size:var(--fs-xs); }
+
+@media (max-width: 480px){
+  .top{ padding:28px 16px 16px; }
+  .panel{ padding:0 16px 40px; }
+  .block{ padding:16px; }
+  .row{ flex-direction:column; align-items:stretch; }
+}
