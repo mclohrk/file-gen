@@ -35,7 +35,8 @@
     <h2><span data-i18n="s1title">01 · container</span></h2>
     <p class="hint" data-i18n="s1hint">extensão do arquivo que o input da aplicação espera.</p>
     <div class="grid" id="containers">
-      <label><input type="checkbox" value="pdf" checked><span>.pdf</span></label>
+      <!-- v0.2: tooltip no .pdf explica que o conteúdo é HTML, não PDF real -->
+      <label data-i18n-title="tipPdf"><input type="checkbox" value="pdf" checked><span>.pdf</span></label>
       <label><input type="checkbox" value="php"><span>.php</span></label>
       <label><input type="checkbox" value="js"><span>.js</span></label>
       <label><input type="checkbox" value="svg"><span>.svg</span></label>
@@ -49,13 +50,14 @@
   <section class="block">
     <h2><span data-i18n="s2title">02 · payload</span></h2>
     <p class="hint" data-i18n="s2hint">marcador inofensivo  prova a falha sem executar nada perigoso.</p>
+    <!-- v0.2: tooltips por payload — cada label carrega a hipótese de teste no atributo title -->
     <div class="grid" id="payloads">
-      <label><input type="radio" name="payload" value="js" checked><span>js · alert()</span></label>
-      <label><input type="radio" name="payload" value="php"><span>php · <span data-i18n="marker">marcador</span></span></label>
-      <label><input type="radio" name="payload" value="py"><span>python · print()</span></label>
-      <label><input type="radio" name="payload" value="sql"><span data-i18n="sqltest">sql · string de teste</span></label>
-      <label><input type="radio" name="payload" value="custom"><span data-i18n="custom">personalizado</span></label>
-      <label><input type="radio" name="payload" value="none"><span data-i18n="none">nenhum (vazio)</span></label>
+      <label data-i18n-title="tipJs"><input type="radio" name="payload" value="js" checked><span>js · alert()</span></label>
+      <label data-i18n-title="tipPhp"><input type="radio" name="payload" value="php"><span>php · <span data-i18n="marker">marcador</span></span></label>
+      <label data-i18n-title="tipPy"><input type="radio" name="payload" value="py"><span>python · print()</span></label>
+      <label data-i18n-title="tipSql"><input type="radio" name="payload" value="sql"><span data-i18n="sqltest">sql · string de teste</span></label>
+      <label data-i18n-title="tipCustom"><input type="radio" name="payload" value="custom"><span data-i18n="custom">personalizado</span></label>
+      <label data-i18n-title="tipNone"><input type="radio" name="payload" value="none"><span data-i18n="none">nenhum (vazio)</span></label>
     </div>
     <textarea id="customPayload" data-i18n-ph="customPh" placeholder="cole aqui o payload autorizado pro teste…" disabled></textarea>
   </section>
