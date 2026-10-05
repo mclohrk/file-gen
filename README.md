@@ -16,12 +16,6 @@ Exemplo do output:
 $ cat file-gen_20261005.pdf
 <script>alert('FILEGEN-TEST')</script>   ← 38 bytes, HTML puro com extensão .pdf
 ```
-
-**Consequência direta:** se o alvo rejeitar o arquivo, isso significa que a validação de conteúdo (magic bytes, parsing) está ativa — é um resultado positivo de defesa, não um bug da ferramenta. Se aceitar e servir o arquivo de volta, o vetor depende de *como* ele é servido:
-
-- Servido como `application/pdf` → o viewer tenta parsear HTML como PDF e nada acontece;
-- Servido como `text/html` (ou sem `X-Content-Type-Options: nosniff`) → MIME sniffing e o payload executa → stored XSS confirmado.
-
 ## Como funciona
 
 1. **Container** — escolhe a(s) extensão(ões) que o input da aplicação-alvo espera (`.pdf`, `.php`, `.js`, `.svg`, `.xml`, `.csv`, `.jpg`, `.zip`). O conteúdo não será um documento válido dessa extensão.
