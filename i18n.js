@@ -4,7 +4,7 @@
 //       apply() agora também resolve data-i18n-title (tooltips via atributo title).
 const I18N = {
   pt: {
-    subtitle: 'Gera arquivos com a extensão que o alvo espera, mas com conteúdo simples. É um teste de falsificação (content spoofing): verifica se o app valida o conteúdo real ou só extensão/MIME. Nenhum arquivo gerado é um documento válido da extensão escolhida — e é exatamente esse o ponto.',
+    subtitle: 'Monta arquivos de teste para validar controles de upload referentes à vulnerabilidade de file upload, podendo adicionar payloads personalizados.',
     s1title: '01 · container',
     s1hint: 'A extensão que o input aceita. O conteúdo NÃO será um documento válido dessa extensão — ex.: .pdf conterá HTML, não um PDF real. Se o alvo rejeitar, é sinal de validação de conteúdo ativa.',
     s2title: '02 · payload',
@@ -28,7 +28,7 @@ const I18N = {
     okBatch: (n, c) => `gerado: ${n} (${c} arquivos)`,
   },
   en: {
-    subtitle: 'Generates files with the extension the target expects, but with simple content. This is a content spoofing test: it checks whether the app validates real content or only extension/MIME. No generated file is a valid document of the chosen extension — that is the point.',
+    subtitle: 'builds test files to validate upload controls  pick the container, the payload, and generate.',
     s1title: '01 · container',
     s1hint: 'The extension the input accepts. Content will NOT be a valid document of that extension — e.g., .pdf will contain HTML, not a real PDF. Rejection means content validation is active.',
     s2title: '02 · payload',
